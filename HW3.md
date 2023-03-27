@@ -127,5 +127,88 @@ Partial dependence of total cases on precipitation_amt:
 
 Comparing the RMSE, the random forest performs best on the test set with the lowest RMSE.
 
+## Q3: Predictive model building: green certification
+
+### Introduction:
+
+To build the best predictive model possible for revenue per square foot per calendar year, and to use this model to quantify the average change in rental income per square foot associated with green certification, I used variable selection, tree, random forest to find the best model.
+
+### Data:
+
+First, I set revenue = Rent*leasing_rate(%) to show the revenue per square foot per year. And green certified was shown as green_rating.
+For these variables, I dropped CS_PropertyID, Rent, leasing_rate, LEED, Energystar, cluster, net, cd_total_07, hd_total07. Because some of them doesn't relate to revenue, and some of them relate to other variables, if we add them in the model, it will be overlapped.
+
+### Method:
+
+I separately test five models: tree, random forest, linear model, liner model with two-way interactions, gbm. 
+
+1.tree
+
+![image](https://user-images.githubusercontent.com/112587000/228060145-847eeea2-c58b-4b9a-8a8c-6481d88602f8.png)
+
+2.random forest
+
+![image](https://user-images.githubusercontent.com/112587000/228060188-bf3f5ae5-d451-4921-b674-fa57069464bf.png)
+
+![image](https://user-images.githubusercontent.com/112587000/228060231-37d68556-905a-4528-8478-4c060424b876.png)
+
+![image](https://user-images.githubusercontent.com/112587000/228060256-d7347b95-63d0-4975-a9ce-b27c8ac9d0d8.png)
+
+![image](https://user-images.githubusercontent.com/112587000/228060298-f1cafa51-2ca6-4e2c-ab47-feadf46c0f52.png)
+
+
+3.liner model
+
+![image](https://user-images.githubusercontent.com/112587000/228060682-71a97de6-2c67-4acf-a9a9-0a8c17487f65.png)
+
+4.liner model with two_way interactions
+The model is:
+
+lm(formula = revenue ~ size + empl_gr + stories + age + class_a + 
+    class_b + green_rating + amenities + total_dd_07 + Precipitation + 
+    Gas_Costs + Electricity_Costs + City_Market_Rent + size:City_Market_Rent + 
+    empl_gr:Electricity_Costs + stories:class_a + green_rating:amenities + 
+    total_dd_07:City_Market_Rent + size:Precipitation + size:amenities + 
+    age:green_rating + size:age + empl_gr:Precipitation + amenities:Electricity_Costs + 
+    stories:Gas_Costs + amenities:Gas_Costs + amenities:Precipitation + 
+    age:total_dd_07 + age:City_Market_Rent + empl_gr:Gas_Costs + 
+    total_dd_07:Precipitation + age:Precipitation + class_a:Gas_Costs + 
+    class_a:Electricity_Costs + class_a:total_dd_07, data = green_train)
+
+5.gbm
+
+![image](https://user-images.githubusercontent.com/112587000/228060395-67de9b7f-e30d-4c5b-b8e5-3bae7f85462e.png)
+
+Then I test RMSE for these models, the result shows that random forest has the min RMSE = 6.72, so we choose random forest as our model.
+For random forest model, I take variable importance measures to show that how much does mean-squared error increase when we ignore a variable, and calculate the average change in rental income per square foot associated with green certification with partial dependence plot.
+
+### Result:
+
+RMSE
+
+> modelr::rmse(green.tree, green_test)
+
+[1] 8.735821
+
+> modelr::rmse(green.forest, green_test)
+
+[1] 6.716499
+
+> modelr::rmse(lm_medium, green_test)
+
+[1] 10.37368
+
+> modelr::rmse(lm_step, green_test)
+
+[1] 9.745055
+
+> modelr::rmse(green_gb, green_test)
+
+[1] 7.740721
+
+I choose random forest as my model, and green certification have positive effect on the average change in rental income per square foot.
+
+
+
 
 
