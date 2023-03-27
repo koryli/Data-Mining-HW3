@@ -226,14 +226,19 @@ Last we use the gradient-boosted trees.
 
 After finishing all these models, we calculate their RMSE to represent an estimate for the overall out-of-sample accuracy of your proposed models and summarize them into a chart. 
 
+![image](https://user-images.githubusercontent.com/112587000/228068774-9cda548d-986b-4772-977f-d3b9b43383c9.png)
 
 After comparison, we find that Gradient Boosting trees has the smallest RMSE. So we choose Gradient Boosting trees to be our best predictive model.
 
 a plot of the original data, using a color scale to show medianHouseValue (or log medianHouseValue) versus longitude (x) and latitude (y).
 
+![image](https://user-images.githubusercontent.com/112587000/228069143-219b568e-3d8a-4d58-ba26-73f155909a8a.png)
 
 a plot of your model's predictions of medianHouseValue (or log medianHouseValue) versus longitude (x) and latitude (y).
 
+![image](https://user-images.githubusercontent.com/112587000/228069217-54d9e605-f8d4-47ec-9cde-5f1f3770bde6.png)
 
 a plot of your model's errors/residuals (or log residuals) versus longitude (x) and latitude (y).
+
+![image](https://user-images.githubusercontent.com/112587000/228069312-30b49617-0478-4cdd-90e9-3cd55fca397a.png)
 
