@@ -162,6 +162,7 @@ I separately test five models: tree, random forest, linear model, liner model wi
 ![image](https://user-images.githubusercontent.com/112587000/228060682-71a97de6-2c67-4acf-a9a9-0a8c17487f65.png)
 
 4.liner model with two_way interactions
+
 The model is:
 
 lm(formula = revenue ~ size + empl_gr + stories + age + class_a + 
@@ -209,6 +210,30 @@ RMSE
 I choose random forest as my model, and green certification have positive effect on the average change in rental income per square foot.
 
 
+## Q4
+
+First, we split the sample into training and testing. We start with the linear regression that we're most familiar with. We get our model1: linear model. After linear model, it comes to the CART model, and we plot its cross-validated error plot. 
+
+![image](https://user-images.githubusercontent.com/112587000/228065599-a0e13494-4fda-4434-98f5-2bb6b8067d7c.png)
+
+Then here a convenient function to pick the smallest tree whose CV error is within 1 standard error of the smallest value. And using this function we prune our tree at the 1se complexity level. Next we use the random forests. We also plot the out-of-bag MSE as a function of the trees #.
+
+![image](https://user-images.githubusercontent.com/112587000/228065669-c0642b43-d3a0-46de-b838-61ef198bcf29.png)
+
+Last we use the gradient-boosted trees. 
+
+![image](https://user-images.githubusercontent.com/112587000/228065757-e48a1b0d-cb70-435b-8e58-e60b0086a694.png)
+
+After finishing all these models, we calculate their RMSE to represent an estimate for the overall out-of-sample accuracy of your proposed models and summarize them into a chart. 
 
 
+After comparison, we find that Gradient Boosting trees has the smallest RMSE. So we choose Gradient Boosting trees to be our best predictive model.
+
+a plot of the original data, using a color scale to show medianHouseValue (or log medianHouseValue) versus longitude (x) and latitude (y).
+
+
+a plot of your model's predictions of medianHouseValue (or log medianHouseValue) versus longitude (x) and latitude (y).
+
+
+a plot of your model's errors/residuals (or log residuals) versus longitude (x) and latitude (y).
 
